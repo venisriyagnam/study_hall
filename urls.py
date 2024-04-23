@@ -1,20 +1,23 @@
-from django.urls import path
-from . import views
+"""
+URL configuration for UBStudyHall project.
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/4.2/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+from django.contrib import admin
+from django.urls import path,include
 
 urlpatterns = [
-    path('login/', views.login_view, name='login'),
-    path('register/', views.register, name='register'),
-    path('forgot_password/', views.forgot_password, name='forgot_password'),
-    path('home/', views.home, name='home'),
-    path('reserve/',views.reserve, name = 'reserve'),
-    path('room-reserve/', views.room_reserve, name = 'room_reserve'),
-    path('past-reservations/', views.past_reservations, name = 'past_reservations'),
-    path('reservation-cancel/',views.reservation_cancel, name = 'reservation_cancel'),
-    path('modify-html/', views.modify_html, name = 'modify_html'),
-    path('modify-reservation/', views.modify_reservation, name = 'modify_reservation'),
-    path('points/', views.points, name = 'points'),
-    path('about-us/', views.about_us, name = 'about_us'),
-    path('studyhall-reservations/', views.admin_view, name = 'admin_view'),
-    path('contact-us/', views.contact_us, name = 'contact_us'),
-    path('all-feedbacks/', views.all_feedbacks, name = 'all_feedbacks'),
+    path('admin/', admin.site.urls),
+    path('ubstudyhall/', include('UBStudyHallApp.urls'))
 ]
