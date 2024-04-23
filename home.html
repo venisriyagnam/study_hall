@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UB Study Hall - UB</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style type="text/css">
+        .navbar-custom .navbar-text {
+            color: white;
+        }
+        .dropdown-menu-dark{
+            background-color: black !important;
+            color: white;
+        }
+        .dropdown-item:active{
+            background-color: blue !important;
+        }
+        .dropdown-item:hover{
+            background-color: white !important;
+            color: black !important;
+        }
+    </style>
+    <style>
+        /* CSS styles */
+    
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        #main-content {
+            background-color: #fff;
+            padding: 50px 20px 20px 20px;
+            margin-top: 20px;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .user-info {
+            color: #fff;
+            margin-bottom: 20px;
+            margin-right: 10px;
+        }
+
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .feature {
+            width: 30%;
+            background-color: #fff;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature h3 {
+            margin-top: 0;
+        }
+
+        .feature a {
+            text-decoration: none;
+            color: #333;
+            transition: background-color 0.3s ease;
+        }
+
+        .feature a:hover {
+            background-color: #f0f0f0;
+        }
+        .navbar-custom .navbar-text {
+            color: white;
+        }
+        .dropdown-menu-dark{
+            background-color: black !important;
+            color: white;
+        }
+        .dropdown-item:active{
+            background-color: blue !important;
+        }
+        .dropdown-item:hover{
+            background-color: white !important;
+            color: black !important;
+        }
+    </style>
+</head>
+
+<body class="m-0 p-0">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black navbar-custom navbar-text navbar-static-top fixed w-full -mt-6">
+    <div class="container-fluid text-white w-100 m-0 p-0">
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse px-3" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}">Home</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <!-- Include logic here for login/logout -->
+                <li class="nav-item dropdown ">
+                    {% if username %}
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Account
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark pull-right" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">{{username}}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'login' %}">Logout</a></li>
+                        </ul>
+                    {% else %}
+                        <a class="dropdown-item" href="{% url 'login' %}">Logout</a></li>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+    <div class="container-fluid h-100 h-full">
+        <main id="main-content">
+            <h2>About Us</h2>
+            <p>Welcome to UB Study Hall! This platform aims to provide a comprehensive and user-friendly system for managing study room reservations, accessing the online library, participating in community forums, and much more.</p>
+            <p>Our goal is to enhance the academic and social experience of students by providing a one-stop platform for various needs.</p>
+
+            <h2>Our Services</h2>
+            <div class="features">
+                <div class="feature">
+                    <a href="/ubstudyhall/reserve/">
+                        <h3>Study Room Reservations</h3>
+                        <p>Reserve study rooms hassle-free for group or individual study sessions.</p>
+                    </a>
+                </div>
+                <div class="feature">
+                    <a href="/ubstudyhall/past-reservations/">
+                        <h3>My Reservations</h3>
+                        <p>Check your upcoming and past reservations.</p>
+                    </a>
+                </div>
+                <div class="feature">
+                    <a href="/ubstudyhall/points/">
+                        <h3>Points System</h3>
+                        <p>Earn points for booking halls and use them to purchase items from the store.</p>
+                    </a>
+                </div>
+                <div class="feature">
+                    <a href="/ubstudyhall/about-us/">
+                        <h3>About Us</h3>
+                        <p>Explore the inspiration behind the study hall features.</p>
+                    </a>
+                </div>
+                <div class="feature">
+                    <a href="/ubstudyhall/forgot_password/">
+                        <h3>Forgot Password</h3>
+                        <p>Reset passwords using this feature.</p>
+                    </a>
+                </div>
+                <div class="feature">
+                    <a href="/ubstudyhall/contact-us/">
+                        <h3>Contact Us</h3>
+                        <p>Contact via email or office phone number during office hours.</p>
+                    </a>
+                </div>
+                
+            </div>
+        </main>
+    </div>
+
+    <footer class="">
+        <p>&copy; 2023 UB Study Hall. All Rights Reserved.</p>
+    </footer>
+</body>
+
+</html>

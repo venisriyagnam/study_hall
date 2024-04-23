@@ -1,0 +1,78 @@
+<!-- past_and_upcoming_reservations.html -->
+{% extends 'base.html' %}
+{% block title %}My Reservations - {% endblock %}
+{% block content %}
+	<style type="text/css">
+	
+	</style>
+
+    <div class="container mx-auto pt-6 pb-8 pl-8 pr-8">
+        <h2 class="text-2xl font-bold mt-8 mb-7">Upcoming Reservations</h2>
+        {% if upcoming_reservations %}
+            <table class="min-w-full table * table-bordered">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Room Number</th>
+                        <th>Actions</th>
+                        <!-- Add more headers for additional details -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for reservation in upcoming_reservations %}
+                        <tr>
+                            <td>{{ reservation.reserve_date }}</td>
+                            <td>{{ reservation.reserve_timestamp }}</td>
+                            <td>{{ reservation.room_id }}</td>
+                            <td>
+                                {% if request.user.is_authenticated %}
+                                    <form method="POST" action="{% url 'modify_html' %}" class="inline-block">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="reservation_date" value="{{reservation.reserve_date}}">
+                                        <input type="hidden" name="reservation_time" value="{{reservation.reserve_timestamp}}">
+                                        <input type="hidden" name="reservation_id" value="{{ reservation.reserve_id }}">
+                                        <button type="submit" class="btn btn-primary">Modify</button>
+                                    </form>
+                                    <form method="POST" action="{% url 'reservation_cancel' %}" class="inline-block">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="reservation_id" value="{{ reservation.reserve_id }}">
+                                        <button type="submit" class="btn btn-primary">Cancel</button>
+                                    </form>
+                                {% endif %}
+                            </td>
+                            <!-- Display other details of upcoming reservations -->
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+        You have no upcoming reservations
+        {% endif %}
+        <h2 class="text-2xl font-bold mb-4 mt-7">Past Reservations</h2>
+        {% if past_reservations %}
+            <table class="min-w-full table * table-bordered">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Room Number</th>
+                        <!-- Add more headers for additional details -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for reservation in past_reservations %}
+                        <tr>
+                            <td>{{ reservation.reserve_date }}</td>
+                            <td>{{ reservation.reserve_timestamp }}</td>
+                            <td>{{ reservation.room_id }}</td>
+                            <!-- Display other details of past reservations -->
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            You have no past reservations
+        {% endif %}
+    </div>
+{% endblock %}
